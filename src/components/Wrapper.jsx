@@ -101,7 +101,7 @@ function Wrapper() {
           nums:
             calc.nums && calc.nums.toString().includes(".")
               ? calc.nums
-              : calc.nums + ".",
+              : calc.nums + value,
         });
         break;
       case "+":
@@ -119,7 +119,7 @@ function Wrapper() {
       case "=":
         setCalc({
           ...calc,
-          nums: math(calc.result, calc.nums, calc.sign),
+          nums: math(Number(calc.result), Number(calc.nums), calc.sign),
           sign: "",
           result: 0,
         });
