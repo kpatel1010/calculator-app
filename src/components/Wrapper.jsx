@@ -53,14 +53,22 @@ function Wrapper() {
         });
         break;
       case "%":
-        let nums = calc.nums ? parseFloat(calc.nums) : 0;
-        let result = calc.result ? parseFloat(calc.result) : 0;
-        setCalc({
-          ...calc,
-          nums: (nums /= Math.pow(100, 1)),
-          result: (result /= Math.pow(100, 1)),
-          sign: "",
-        });
+        if (calc.nums && calc.result) {
+          setCalc({
+            ...calc,
+            nums: (calc.nums * calc.result) / 100,
+            result: calc.result,
+          });
+        } else {
+          let nums = calc.nums ? parseFloat(calc.nums) : 0;
+          let result = calc.result ? parseFloat(calc.result) : 0;
+          setCalc({
+            ...calc,
+            nums: (nums /= Math.pow(100, 1)),
+            result: (result /= Math.pow(100, 1)),
+            sign: "",
+          });
+        }
         break;
       case ".":
         setCalc({
@@ -86,9 +94,9 @@ function Wrapper() {
       case "=":
         setCalc({
           ...calc,
-          result: math(calc.result, calc.nums, calc.sign),
+          nums: math(calc.result, calc.nums, calc.sign),
           sign: "",
-          nums: 0,
+          result: 0,
         });
         break;
       default:
