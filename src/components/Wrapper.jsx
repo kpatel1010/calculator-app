@@ -125,16 +125,18 @@ function Wrapper() {
         });
         break;
       case num:
-        setCalc({
-          ...calc,
-          nums:
-            calc.nums === 0 && value === "0"
-              ? "0"
-              : calc.nums % 1 === 0
-              ? Number(calc.nums + value)
-              : calc.nums + value,
-          result: !calc.sign ? 0 : calc.result,
-        });
+        if (calc.nums.toString().length < 16) {
+          setCalc({
+            ...calc,
+            nums:
+              calc.nums === 0 && value === "0"
+                ? "0"
+                : calc.nums % 1 === 0
+                ? Number(calc.nums + value)
+                : calc.nums + value,
+            result: !calc.sign ? 0 : calc.result,
+          });
+        }
     }
   }
 

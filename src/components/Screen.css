@@ -1,8 +1,9 @@
 .screen {
   background-color: #476072;
-  font-size: 3.2rem !important;
+  font-size: 2rem !important;
   color: white;
   text-align: right;
-  padding: 0.6rem;
+  padding: 0.6rem 0.9rem;
   border-radius: 10px;
+  overflow: hidden;
 }
