@@ -1,7 +1,11 @@
 .wrapper {
   background-color: #334257;
-  height: 540px;
-  width: 340px;
   padding: 10px;
   border-radius: 10px;
+}
+
+.outerlayer {
+  max-height: 550px;
+  max-width: 350px;
+  margin-top: 50px;
 }

@@ -3,6 +3,7 @@ import Button from "./Button";
 import ButtonBox from "./ButtonBox";
 import Screen from "./Screen";
 import { motion } from "framer-motion";
+import Radium, { StyleRoot } from "radium";
 import "./wrapper.css";
 
 function Wrapper() {
@@ -114,10 +115,10 @@ function Wrapper() {
         }
     }
   }
-  console.log(calc.result, "Result");
-  console.log(calc.nums, "Nums");
+
   return (
     <motion.div
+      className="outerlayer"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
