@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import ButtonBox from "./ButtonBox";
 import Screen from "./Screen";
 import { motion } from "framer-motion";
-import Radium, { StyleRoot } from "radium";
 import "./wrapper.css";
 
 function Wrapper() {
@@ -21,9 +20,34 @@ function Wrapper() {
     result: 0,
   });
 
+  useEffect(() => {
+    document.addEventListener("keydown", detectKeyPress);
+    return () => {
+      document.removeEventListener("keydown", detectKeyPress);
+    };
+  }, [calc]);
+
   function handleOnClick(e) {
     e.preventDefault();
     const value = e.target.innerHTML;
+    calculator(value);
+  }
+
+  function detectKeyPress(e) {
+    const value = e.key;
+    if (value === "Enter") {
+      calculator("=");
+    } else if (value === "Escape") {
+      calculator("C");
+    }
+    calculator(value);
+  }
+
+  function calculator(value) {
+    let num = 0;
+    if (Number(value) >= 0 && Number(value) <= 9) {
+      num = value.match(/[0-9]/)[0];
+    }
 
     const math = (a, b, sign) => {
       switch (sign) {
@@ -100,19 +124,17 @@ function Wrapper() {
           result: 0,
         });
         break;
-      default:
-        if (calc.nums.toString().length < 15) {
-          setCalc({
-            ...calc,
-            nums:
-              calc.nums === 0 && value === "0"
-                ? "0"
-                : calc.nums % 1 === 0
-                ? Number(calc.nums + value)
-                : calc.nums + value,
-            result: !calc.sign ? 0 : calc.result,
-          });
-        }
+      case num:
+        setCalc({
+          ...calc,
+          nums:
+            calc.nums === 0 && value === "0"
+              ? "0"
+              : calc.nums % 1 === 0
+              ? Number(calc.nums + value)
+              : calc.nums + value,
+          result: !calc.sign ? 0 : calc.result,
+        });
     }
   }
 
